@@ -57,8 +57,20 @@ If you would like to have indent guides enabled by default, you can add the foll
 let g:indent_guides_enable_on_vim_startup = 1
 ```
 
-### gVim
+### gVim and Terminal Vim with 'termguicolors' support
 **This plugin should work with gVim out of the box, no configuration needed.** It will automatically inspect your colorscheme and pick appropriate colors.
+If Terminal Vim with `termguicolors` support(`:echo has('termguicolors')` returns `1`), this plugin will also work, and add the following to your `.vimrc` to turn it on:
+
+```viml
+
+    if has('termguicolors')
+        " Fix bug for vim
+        let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+        let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+        " Enable true color
+        set termguicolors
+    endif
+```
 
 ### Setting custom indent colors
 Here's an example of how to define custom colors instead of using the ones the plugin automatically generates for you. Add this to your `.vimrc` file:
@@ -76,8 +88,8 @@ hi IndentGuidesOdd  guibg=red   ctermbg=3
 hi IndentGuidesEven guibg=green ctermbg=4
 ```
 
-### Terminal Vim
-At the moment Terminal Vim only has basic support. This means is that colors won't be automatically calculated based on your colorscheme. Instead, some preset colors are used depending on whether `background` is set to `dark` or `light`.
+### Terminal Vim without 'termguicolors' support
+At the moment Terminal Vim without `termguicolors` support only has basic support. This means is that colors won't be automatically calculated based on your colorscheme. Instead, some preset colors are used depending on whether `background` is set to `dark` or `light`.
 
 When `set background=dark` is used, the following highlight colors will be defined:
 
